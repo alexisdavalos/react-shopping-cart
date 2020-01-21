@@ -16,14 +16,19 @@ function App() {
 	const [cart, setCart] = useState([]);
 
 	const addItem = item => {
+		console.log('Cart Item',item)
 		setCart([
 			...cart, item
 		])
 	};
+	const removeItem = (id) =>{
+		const newCart = cart.filter(item => item.id !== id) //filters current cart and removes item that matches the id passed
+		setCart(newCart);
+	}
 
 	return (
 		<ProductContext.Provider value={{products, addItem}}>
-			<CartContext.Provider value={{cart}}>
+			<CartContext.Provider value={{cart, removeItem}}>
 				<div className="App">
 					<Navigation cart={cart} />
 
